@@ -1,31 +1,20 @@
-import { HeaderService } from './header.service';
-import { JwtResponse } from './../models/jwt-response';
-import { Reader } from './../models/reader';
-import { User } from './../models/user';
+import { environment } from './../../environments/environment';
+import { JwtResponse, UserLog } from './../models/jwt-response';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {tap} from 'rxjs/operators';
 import {Observable, BehaviorSubject} from 'rxjs';
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class AuthService {
   authSubject = new BehaviorSubject(false);
   private token: string;
+  path : string = environment.backend;
 
-  constructor(private httpClient: HttpClient, private headerService:HeaderService) { }
+  constructor(private httpClient: HttpClient) { }
 
-  registerReader(reader: Reader): Observable<JwtResponse> {
-    return this.httpClient.post<JwtResponse>(this.headerService.getPath() + "/reader", reader).pipe(tap(
-      (res: JwtResponse)=> {
-        if(res){
-          this.saveToken(res.token);
-        }
-      }
-    ));
-  }
-
-  login(user: User): Observable<JwtResponse> {
-    return this.httpClient.post<JwtResponse>(this.headerService.getPath() + "/auth/login", user).pipe(tap(
+  login(user: UserLog): Observable<JwtResponse> {
+    return this.httpClient.post<JwtResponse>(this.path + "/auth/login", user).pipe(tap(
       (res: JwtResponse)=> {
         if(res){
             this.saveToken(res.token);
@@ -35,7 +24,7 @@ export class AuthService {
   }
 
   refreshToken(): void {
-    this.httpClient.get(this.headerService.getPath() + "auth/refresh", {headers: this.getHeadersToRefresh()}).pipe(tap(
+    this.httpClient.get(this.path + "auth/refresh", {headers: this.getHeadersToRefresh()}).pipe(tap(
       (res: JwtResponse)=> {
         if(res){
             this.saveToken(res.token);
@@ -46,7 +35,7 @@ export class AuthService {
 
   logout(): void {
     this.token = '';
-    this.httpClient.get(this.headerService.getPath() +"/auth/logout");
+    this.httpClient.get(this.path + "/auth/logout");
     sessionStorage.removeItem("ACCESS_TOKEN");
   }
 

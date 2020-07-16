@@ -1,1 +1,22 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container [hasBackdrop]="true">
+
+  <mat-sidenav-content style="overflow: hidden;">
+    <nav style="z-index: top;" class="navbar navbar-dark" id="menu-horizontal">
+      <div id="menu-horizontal-buttons-left">
+      </div>
+
+      <div id="menu-horizontal-buttons-right">
+        <button class="access" mat-button (click)="openLogin()" >Login</button>
+        <button class="access" mat-button (click)="openLogin()" >Create account</button>
+
+      </div>
+
+    </nav>
+
+    <main id="principal">
+      <router-outlet >
+      </router-outlet>
+    </main>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

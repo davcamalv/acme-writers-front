@@ -1,13 +1,29 @@
-<div class="container">
-  <div class="login">
-    <div class="login-triangle"></div>
-
-    <h2 class="login-header">Log in</h2>
-
-    <form #frmLogin="ngForm" class="login-container" (ngSubmit) = "onLogin(frmLogin)">
-      <p><input type="email" placeholder="Email" name="email" ngModel required></p>
-      <p><input type="password" placeholder="Password" name="password" ngModel required></p>
-      <p><input type="submit" value="Log in"></p>
-    </form>
-  </div>
+<h4>Acceder</h4>
+<div>
+    <div>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Email</mat-label>
+        <input matInput [formControl]="email" (input)="updateValidationInvalidPassword()"/>
+        <mat-error *ngIf="email.invalid">{{ getErrorMessageEmail() }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput [formControl]="pass" [type]="showPass? 'text' : 'password'"/>
+        <mat-icon matSuffix (click)="changePassState()" matTooltip="{{showPass? 'Ocultar contraseña' : 'Mostrar contraseña'}}">remove_red_eye</mat-icon>
+        <mat-error *ngIf="pass.invalid">{{ getErrorMessagePass() }}</mat-error>
+      </mat-form-field>
+    </div>
+    <br/>
+    <div id="buttons-dialog">
+      <button id="cancel-dialog" mat-button color="warn" (click)="cancel()">
+        Cancel
+      </button>
+      <button id="save-dialog" mat-button color="primary" (click)="login()" [disabled]="abled()" cdkFocusInitial>
+        Submit
+      </button>
+    </div>
 </div>
+
+

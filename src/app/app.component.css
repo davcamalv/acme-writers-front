@@ -1,0 +1,38 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+#principal{
+  overflow: auto;
+  height: 90%;
+
+}
+
+#principal::-webkit-scrollbar{
+  z-index: top;
+}
+
+
+/* Menu horizontal */
+
+#menu-horizontal{
+  display: flex;
+   align-items: center;
+  height: 10;
+  min-height: 40px;
+  width: 100%;
+  background-color: indigo;
+  color: whitesmoke;
+  padding: 1%;
+  position: sticky;
+  top: 0;
+  z-index: 5235235235;
+  justify-content: space-between;
+}
+
+#menu-horizontal-buttons-right{
+  margin-right: 5%;
+  text-align: right;
+}
+
+
