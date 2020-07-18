@@ -1,14 +1,17 @@
 <mat-sidenav-container [hasBackdrop]="true">
 
   <mat-sidenav-content style="overflow: hidden;">
-    <nav style="z-index: top;" class="navbar navbar-dark" id="menu-horizontal">
-      <div id="menu-horizontal-buttons-left">
-      </div>
+    <nav style="z-index: top;" class="navbar navbar-blue" id="menu-horizontal">
 
       <div id="menu-horizontal-buttons-right">
-        <button class="access" mat-button (click)="openLogin()" >Login</button>
-        <button class="access" mat-button (click)="openLogin()" >Create account</button>
-
+        <div id="unlogged" *ngIf="roles == undefined">
+          <button mat-button (click)="openLogin()" >Login</button>
+          <button mat-button>Create account</button>
+        </div>
+        <div id="logged" *ngIf="roles != undefined">
+          <button mat-button (click)="logout()" >Logout</button>
+          <button mat-button>Profile</button>
+        </div>
       </div>
 
     </nav>

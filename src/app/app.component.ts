@@ -1,7 +1,9 @@
+import { AuthService } from './services/auth.service';
 import { LoginComponent } from './auth/login/login.component';
 import { Component, OnDestroy, OnInit, Injectable } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RouterEvent } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import * as jwt_decode from 'jwt-decode';
 
 
 @Injectable({providedIn:'root'})
@@ -12,34 +14,22 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-
+  roles: string[] = [];
   routes: Object[] = [];
 
-  loading = false;
-  title: any = 'acme-writers-front';
-
-
-  constructor(private router: Router, private dialog: MatDialog) {
-    this.router.events.subscribe((event: RouterEvent) =>{
-      switch(true){
-        case event instanceof NavigationStart: {
-          this.loading = true;
-          break;
-        }
-        case event instanceof NavigationEnd:
-        case event instanceof NavigationCancel:
-        case event instanceof NavigationError: {
-          this.loading = false;
-          break;
-        }
-      }
-    });
+  constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {
 
   }
 
   ngOnInit(): void{
-    this.loadMenu();
+    let token = sessionStorage.getItem("ACCESS_TOKEN");
+    if(token != null && token !== ""){
+      this.redirectUser();
+    }else{
+      this.navigateTo("welcome");
+    }
   }
+
 
   ngOnDestroy(): void {
 
@@ -57,22 +47,34 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  loadMenu() : void{
-    let token = sessionStorage.getItem("loginToken");
-    let logged = token != null && token !== "";
-
-  }
-
   openLogin(): void {
     let dialog = this.dialog.open(LoginComponent, {
       width: '250px'
     });
     dialog.afterClosed().subscribe(()=>{
-      let token = sessionStorage.getItem("loginToken");
+      let token = sessionStorage.getItem("ACCESS_TOKEN");
       if(token != null && token != ""){
-        this.loadMenu();
+        this.redirectUser();
       }
     });
+  }
+
+  logout(): void{
+    this.authService.logout();
+    this.roles = undefined;
+    this.navigateTo("welcome");
+  }
+
+  redirectUser(){
+        this.roles = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"))["roles"];
+
+        if (this.roles.includes("writer")){
+          this.navigateTo("writer");
+        }else if(this.roles.includes("publisher")){
+          this.navigateTo("publisher");
+        }else if(this.roles.includes("reader")){
+          this.navigateTo("reader");
+        }
   }
 
 }
