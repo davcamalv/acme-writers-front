@@ -8,7 +8,6 @@ import {Observable, BehaviorSubject} from 'rxjs';
 @Injectable({providedIn:'root'})
 export class AuthService {
   authSubject = new BehaviorSubject(false);
-  private token: string;
   path : string = environment.backend;
 
   constructor(private httpClient: HttpClient) { }
@@ -34,14 +33,12 @@ export class AuthService {
   }
 
   logout(): void {
-    this.token = '';
     this.httpClient.get(this.path + "/auth/logout");
     sessionStorage.removeItem("ACCESS_TOKEN");
   }
 
   private saveToken(token:string): void{
     sessionStorage.setItem("ACCESS_TOKEN", token);
-    this.token = token;
   }
 
   private getHeadersToRefresh(): HttpHeaders{

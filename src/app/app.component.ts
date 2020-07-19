@@ -4,6 +4,7 @@ import { Component, OnDestroy, OnInit, Injectable } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RouterEvent } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import * as jwt_decode from 'jwt-decode';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 @Injectable({providedIn:'root'})
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if(token != null && token !== ""){
       this.redirectUser();
     }else{
+      this.roles =undefined;
       this.navigateTo("welcome");
     }
   }
@@ -49,12 +51,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
   openLogin(): void {
     let dialog = this.dialog.open(LoginComponent, {
-      width: '250px'
+      width: '250px',
     });
     dialog.afterClosed().subscribe(()=>{
       let token = sessionStorage.getItem("ACCESS_TOKEN");
       if(token != null && token != ""){
         this.redirectUser();
+      }
+    });
+  }
+
+  register(rol: string): void {
+    this.dialog.open(RegisterComponent, {
+      width: '350px',
+      data: {
+        rol: rol
       }
     });
   }

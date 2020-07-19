@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   hide = true;
   email = new FormControl('', { validators: [Validators.required, Validators.email]});
   pass = new FormControl('', { validators: [Validators.required] });
-  showPass : boolean = false;
   disabled: boolean;
 
   constructor( public dialogRef: MatDialogRef<LoginComponent>,
@@ -38,11 +37,6 @@ export class LoginComponent implements OnInit {
   cancel(): void {
     this.dialogRef.close();
   }
-
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
 
   updateValidationInvalidPassword(): void {
     this.pass.setErrors({invalid: true});
@@ -67,14 +61,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  changePassState(){
-      this.showPass = !this.showPass;
-  }
-
   getErrorMessageEmail() : string{
-    return this.email.hasError('required')? "Debe introducir un email": this.email.hasError('email') ? "El email debe tener un formato válido": "";
+    return this.email.hasError('required')? "You must enter an email": this.email.hasError('email') ? "The email must be in a valid format": "";
   }
   getErrorMessagePass(): string{
-    return this.pass.hasError('required')? "Debe introducir una contraseña": this.pass.hasError('invalid')? "Email o contraseña no encontrado, verifique los datos.":"";
+    return this.pass.hasError('required')? "You must enter a password": this.pass.hasError('invalid')? "Email or password not found, please check":"";
   }
 }

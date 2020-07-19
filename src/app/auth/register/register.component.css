@@ -1,0 +1,12 @@
+
+
+#buttons-dialog{
+  width: 100%;
+}
+#save-dialog{
+ float: right;
+}
+
+mat-icon:hover {
+cursor: pointer;
+}
