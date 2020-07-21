@@ -62,10 +62,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   register(rol: string): void {
-    this.dialog.open(RegisterComponent, {
+    let dialog = this.dialog.open(RegisterComponent, {
       width: '350px',
       data: {
         rol: rol
+      }
+    });
+    dialog.afterClosed().subscribe(()=>{
+      let token = sessionStorage.getItem("ACCESS_TOKEN");
+      if(token != null && token != ""){
+        this.redirectUser();
       }
     });
   }

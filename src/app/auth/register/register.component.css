@@ -7,6 +7,29 @@
  float: right;
 }
 
+#creditcard-information{
+  width: 100%;
+  display: inline-block;
+}
+
+#number{
+  float: left;
+  width: 70%;
+}
+
+#cvv{
+  float: right;
+  width: 25%;
+}
+
 mat-icon:hover {
 cursor: pointer;
+}
+
+.month-year-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.month-year-picker .mat-calendar-arrow {
+  display: none;
 }
