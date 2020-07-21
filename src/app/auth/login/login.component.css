@@ -1,18 +1,12 @@
-
-#login-dialog {
+#cancel-dialog {
+  float: left;
   margin-left: 1em;
 }
 
-#login-dialog:hover {
-  background-color: #18A1F0;
+#save-dialog {
+  float: right;
+  margin-right: 1em;
 }
-
-#cancel-dialog {
-  margin-right: 2.5em;
-  margin-left: 0.5em;
-
-}
-
 
 #buttons-dialog {
   justify-content: center;

@@ -6,7 +6,12 @@
       <div id="menu-horizontal-buttons-right">
         <div id="unlogged" *ngIf="roles == undefined">
           <button mat-button (click)="openLogin()" >Login</button>
-          <button mat-button>Create account</button>
+          <button mat-button [matMenuTriggerFor]="menu">Register</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="register('writer')">Writer</button>
+            <button mat-menu-item (click)="register('publisher')">Publisher</button>
+            <button mat-menu-item (click)="register('reader')">Reader</button>
+          </mat-menu>
         </div>
         <div id="logged" *ngIf="roles != undefined">
           <button mat-button (click)="logout()" >Logout</button>

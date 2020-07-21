@@ -1,4 +1,4 @@
-<h4>Login</h4>
+<h2 mat-dialog-title>Login</h2>
 <div>
     <div>
       <mat-form-field style="width: 100%;">
@@ -10,8 +10,10 @@
     <div>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput [formControl]="pass" [type]="showPass? 'text' : 'password'"/>
-        <mat-icon matSuffix (click)="changePassState()" matTooltip="{{showPass? 'Ocultar contraseña' : 'Mostrar contraseña'}}">remove_red_eye</mat-icon>
+        <input matInput [formControl]="pass" [type]="hide? 'password' : 'text'"/>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
         <mat-error *ngIf="pass.invalid">{{ getErrorMessagePass() }}</mat-error>
       </mat-form-field>
     </div>

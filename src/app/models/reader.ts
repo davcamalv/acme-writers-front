@@ -4,5 +4,5 @@ export interface Reader {
   email: string,
   password: string,
   address?: string,
-  phoneNumber?: string
+  phone_number?: string
 }

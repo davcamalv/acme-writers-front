@@ -33,7 +33,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import {MatMenuModule} from '@angular/material/menu';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -83,6 +83,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MatStepperModule,
     BrowserModule,
     MatTableModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     FormsModule,
