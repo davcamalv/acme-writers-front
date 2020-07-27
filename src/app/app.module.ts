@@ -40,20 +40,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-
+import { BrowseComponent } from './browse/browse.component';
+import { OwlModule } from 'ngx-owl-carousel';
+import { ImgFallbackModule } from 'ngx-img-fallback';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    BrowseComponent
   ],
   imports: [
+    ImgFallbackModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    OwlModule,
     MatFormFieldModule,
     MatAutocompleteModule,
     MatCheckboxModule,

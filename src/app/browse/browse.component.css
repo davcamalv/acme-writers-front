@@ -1,0 +1,25 @@
+.new-books{
+  width: 90%;
+  height: 80%;
+  margin: auto;
+  margin-top: 5%;
+
+}
+
+img{
+  max-width: 120px;
+  max-height: 120px;
+  margin: auto;
+  margin-top: 6%;
+}
+
+.img-buttons{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  width: 220px;
+  height: 220px;
+  white-space: normal;
+
+}
+
