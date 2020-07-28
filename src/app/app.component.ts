@@ -14,10 +14,11 @@ import { RegisterComponent } from './auth/register/register.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent implements OnInit, OnDestroy {
   roles: string[] = [];
   routes: Object[] = [];
-
   constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {
 
   }
@@ -83,15 +84,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   redirectUser(){
-        this.roles = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"))["roles"];
-
-        if (this.roles.includes("writer")){
-          this.navigateTo("writer");
-        }else if(this.roles.includes("publisher")){
-          this.navigateTo("publisher");
-        }else if(this.roles.includes("reader")){
-          this.navigateTo("reader");
-        }
+    this.roles = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"))["roles"];
+    this.navigateTo("browse");
   }
 
 }

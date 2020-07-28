@@ -5,7 +5,6 @@ mat-sidenav-container {
 #principal{
   overflow: auto;
   height: 90%;
-
 }
 
 #principal::-webkit-scrollbar{
@@ -25,12 +24,50 @@ mat-sidenav-container {
   top: 0;
   z-index: 5235235235;
   justify-content: space-between;
+
 }
 
 #menu-horizontal-buttons-right{
   margin-right: 5%;
-  text-align: right;
+  float: right;
+}
+#menu-horizontal-buttons-left{
+  float: left;
 }
 
+.menu-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
 
+.menu-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-sidenav {
+  width: 15%;
+  background-color: white;
+}
+
+#genres-buttons > button{
+  display: inline-block;
+  width: 50%;
+}
+
+.vertical-left-button{
+    background-color: white;
+    text-align: center;
+}
+
+.vertical-left-button:hover {
+    background-color: #f9a825;
+}
+
+#menu-vertical-left{
+  width: 20%;
+}
 
