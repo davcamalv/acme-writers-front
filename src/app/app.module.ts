@@ -43,6 +43,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { BrowseComponent } from './browse/browse.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { ImgFallbackModule } from 'ngx-img-fallback';
+import { ListBooksComponent } from './list-books/list-books.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     RegisterComponent,
     LoginComponent,
     WelcomeComponent,
-    BrowseComponent
+    BrowseComponent,
+    ListBooksComponent
   ],
   imports: [
     ImgFallbackModule,

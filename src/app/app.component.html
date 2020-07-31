@@ -1,17 +1,16 @@
 <mat-sidenav-container [hasBackdrop]="true">
 
-  <mat-sidenav [autoFocus]="false" id="menu-vertical-left" #sidenav mode="over" [fixedInViewport]="true" [fixedTopGap]="70">
-    <button mat-flat-button class="vertical-left-button" style="width: 100%; height: 10%;">Search Books</button>
-    <button mat-flat-button class="vertical-left-button" style="width: 100%; height: 10%;">List my Books</button>
-    <button mat-flat-button class="vertical-left-button" style="width: 100%; height: 10%;">List my Publishers</button>
-    <button mat-flat-button class="vertical-left-button" style="width: 100%; height: 10%;">Books Reviews</button>
-
-  </mat-sidenav>
-
   <mat-sidenav-content style="overflow: hidden;">
     <nav style="z-index: top;" class="navbar navbar-blue" id="menu-horizontal">
       <div id="menu-horizontal-buttons-left" *ngIf="roles != undefined">
-        <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+        <button mat-icon-button (click)="navigateTo('browse')" style="margin-right: 5%;"><mat-icon>home</mat-icon></button>
+        <button mat-button [matMenuTriggerFor]="menuBooks">Books</button>
+        <mat-menu #menuBooks="matMenu">
+          <button id="menu-button" mat-menu-item>Create Book</button>
+          <button id="menu-button" mat-menu-item (click)="navigateTo('listMyBooks')">List my Books</button>
+        </mat-menu>
+        <button mat-button>Publishers</button>
+        <button mat-button>Reviews</button>
       </div>
 
       <div id="menu-horizontal-buttons-right">
@@ -19,9 +18,9 @@
           <button mat-button (click)="openLogin()" >Login</button>
           <button mat-button [matMenuTriggerFor]="menuRegister">Register</button>
           <mat-menu #menuRegister="matMenu">
-            <button mat-menu-item (click)="register('writer')">Writer</button>
-            <button mat-menu-item (click)="register('publisher')">Publisher</button>
-            <button mat-menu-item (click)="register('reader')">Reader</button>
+            <button id="menu-button" mat-menu-item (click)="register('writer')">Writer</button>
+            <button id="menu-button" mat-menu-item (click)="register('publisher')">Publisher</button>
+            <button id="menu-button" mat-menu-item (click)="register('reader')">Reader</button>
           </mat-menu>
         </div>
         <div id="logged" *ngIf="roles != undefined">

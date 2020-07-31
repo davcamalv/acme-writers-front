@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
   roles: string[] = [];
   routes: Object[] = [];
   constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {
-
   }
 
   ngOnInit(): void{

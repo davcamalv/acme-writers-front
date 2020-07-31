@@ -23,13 +23,14 @@ export class AuthService {
   }
 
   refreshToken(): void {
-    this.httpClient.get(this.path + "auth/refresh", {headers: this.getHeadersToRefresh()}).pipe(tap(
-      (res: JwtResponse)=> {
-        if(res){
-            this.saveToken(res.token);
-        }
-      }
-    ));
+    this.httpClient.get<JwtResponse>(this.path + "/auth/refresh", {headers: this.getHeadersToRefresh()}).subscribe(
+    (res: JwtResponse) => {
+      this.saveToken(res.token)
+    },
+    (error) => {
+      console.error(error.error);
+      this.logout();
+    });
   }
 
   logout(): void {

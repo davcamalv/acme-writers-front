@@ -5,7 +5,7 @@ export interface Book {
   language: string,
   cover?: string,
   draft: boolean,
-  ticker: string,
+  identifier: string,
   genre?: string,
   publisher?: number,
   writer: number
