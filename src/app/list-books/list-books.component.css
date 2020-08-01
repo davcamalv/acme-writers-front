@@ -1,10 +1,15 @@
-.table{
+.my-books{
   width: 90%;
-  height: 80%;
   margin: auto;
   margin-top: 5%;
 
 }
+
+.table{
+  height: 80%;
+  margin: auto;
+}
+
 table {
   width: 100%;
   margin-bottom: 5%;

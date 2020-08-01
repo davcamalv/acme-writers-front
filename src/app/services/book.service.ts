@@ -23,4 +23,7 @@ export class BookService {
     return this.httpClient.get<void>(this.headerService.getPath() + "/book/change-draft/" + bookId, {headers: this.headerService.getBasicAuthentication()});
   }
 
+  findBook(bookId: number): Observable<Book> {
+    return this.httpClient.get<Book>(this.headerService.getPath() + "/book/show/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
 }

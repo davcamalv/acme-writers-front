@@ -44,6 +44,8 @@ import { BrowseComponent } from './browse/browse.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { ImgFallbackModule } from 'ngx-img-fallback';
 import { ListBooksComponent } from './list-books/list-books.component';
+import { BookComponent } from './book/book.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -52,9 +54,11 @@ import { ListBooksComponent } from './list-books/list-books.component';
     LoginComponent,
     WelcomeComponent,
     BrowseComponent,
-    ListBooksComponent
+    ListBooksComponent,
+    BookComponent
   ],
   imports: [
+    MatTabsModule,
     ImgFallbackModule,
     BrowserModule,
     AppRoutingModule,

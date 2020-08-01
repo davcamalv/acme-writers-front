@@ -6,3 +6,8 @@ export interface Reader {
   address?: string,
   phone_number?: string
 }
+
+export interface BasicReader {
+  name: string,
+  photo?: string
+}
