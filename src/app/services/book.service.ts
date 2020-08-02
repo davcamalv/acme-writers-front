@@ -1,4 +1,4 @@
-import { Book } from './../models/book';
+import { Book, BookToSave } from './../models/book';
 import { Observable } from 'rxjs';
 import { HeaderService } from './header.service';
 import { HttpClient } from '@angular/common/http';
@@ -25,5 +25,13 @@ export class BookService {
 
   findBook(bookId: number): Observable<Book> {
     return this.httpClient.get<Book>(this.headerService.getPath() + "/book/show/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  createBook(book: BookToSave): Observable<Book> {
+    return this.httpClient.post<Book>(this.headerService.getPath() + "/book", book, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  updateBook(book: BookToSave): Observable<Book> {
+    return this.httpClient.put<Book>(this.headerService.getPath() + "/book", book, {headers: this.headerService.getBasicAuthentication()});
   }
 }

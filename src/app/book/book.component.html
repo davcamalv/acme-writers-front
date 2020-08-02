@@ -21,7 +21,7 @@
       <br>
       <li *ngIf="book.draft">
         <div class="edit-book">
-          <button mat-raised-button color="primary" >Edit</button>
+          <button mat-raised-button color="primary" (click)="updateBook(book.id)">Edit</button>
           <button mat-raised-button color="warn" (click)="publish(book.id)">Publish</button>
         </div>
       </li>
@@ -69,7 +69,7 @@
                 <mat-icon>{{opinion.positive ? 'thumb_up' : 'thumb_down'}}</mat-icon>
               </div>
             </mat-card-header>
-            <mat-card-content style="margin-top: 10px;">
+            <mat-card-content class="card-content">
               <p>
                 {{opinion.review}}
               </p>

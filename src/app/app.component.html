@@ -6,7 +6,7 @@
         <button mat-icon-button (click)="navigateTo('browse')" style="margin-right: 5%;"><mat-icon>home</mat-icon></button>
         <button mat-button [matMenuTriggerFor]="menuBooks">Books</button>
         <mat-menu #menuBooks="matMenu">
-          <button id="menu-button" mat-menu-item>Create Book</button>
+          <button id="menu-button" mat-menu-item (click)="createBook()">Create Book</button>
           <button id="menu-button" mat-menu-item (click)="navigateTo('listMyBooks')">List my Books</button>
         </mat-menu>
         <button mat-button>Publishers</button>

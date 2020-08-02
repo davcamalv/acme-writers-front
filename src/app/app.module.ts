@@ -46,6 +46,7 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
 import { ListBooksComponent } from './list-books/list-books.component';
 import { BookComponent } from './book/book.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { SaveBookComponent } from './save-book/save-book.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     WelcomeComponent,
     BrowseComponent,
     ListBooksComponent,
-    BookComponent
+    BookComponent,
+    SaveBookComponent
   ],
   imports: [
     MatTabsModule,

@@ -68,3 +68,8 @@
 .opinion-card{
   margin-bottom: 20px;
 }
+
+.card-content{
+  margin: 10px;
+  text-align: justify;
+}

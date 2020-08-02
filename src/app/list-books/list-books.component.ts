@@ -1,3 +1,5 @@
+import { SaveBookComponent } from './../save-book/save-book.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Book } from './../models/book';
 import { BookService } from './../services/book.service';
@@ -23,7 +25,7 @@ export class ListBooksComponent implements OnInit {
   displayedColumns: string[] = ['identifier','title','language', 'mode'];
   expandedElement: Book | null;
 
-  constructor(private router: Router, private bookService: BookService) {
+  constructor(private router: Router, private bookService: BookService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -54,6 +56,19 @@ export class ListBooksComponent implements OnInit {
           this.matDataSource.data = books;
         });
       });
+  }
+
+  updateBook(bookId: number){
+    let dialog = this.dialog.open(SaveBookComponent, {
+      width: '350px',
+      data: {
+        id: bookId
+      }
+    });
+    dialog.afterClosed().subscribe(()=>{
+      this.navigateTo('listMyBooks');
+      this.ngOnInit();
+    });
   }
 
   applyFilter(event: Event) {

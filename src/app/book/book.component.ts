@@ -1,3 +1,5 @@
+import { SaveBookComponent } from './../save-book/save-book.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Opinion } from './../models/opinion';
 import { OpinionService } from './../services/opinion.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,9 +25,21 @@ export class BookComponent implements OnInit {
   matDataSource = new MatTableDataSource([]);
   displayedColumns: string[] = ['number', 'title', 'buttons'];
 
-  constructor(private router: Router, private route: ActivatedRoute, private bookService: BookService, private chapterService: ChapterService, private opinionService: OpinionService) {
+  constructor(private dialog: MatDialog, private router: Router, private route: ActivatedRoute, private bookService: BookService, private chapterService: ChapterService, private opinionService: OpinionService) {
     this.bookId = this.route.snapshot.queryParams['id'];
    }
+
+   navigateTo(route: string, method?: string, id?: number): void{
+    if(method==undefined && id == undefined){
+      this.router.navigate([route]);
+    }else if(method != undefined && id == undefined){
+      this.router.navigate([route], {queryParams:{method: method}});
+    }else if(method == undefined && id != undefined){
+      this.router.navigate([route], {queryParams:{id: id}});
+    }else if(method != undefined && id != undefined){
+      this.router.navigate([route], {queryParams:{method: method, id: id}});
+    }
+  }
 
   ngOnInit(): void {
     this.bookService
@@ -51,4 +65,15 @@ export class BookComponent implements OnInit {
     });
 }
 
+updateBook(bookId: number){
+  let dialog = this.dialog.open(SaveBookComponent, {
+    width: '350px',
+    data: {
+      id: bookId
+    }
+  });
+  dialog.afterClosed().subscribe(()=>{
+    this.navigateTo('listMyBooks');
+  });
+}
 }
