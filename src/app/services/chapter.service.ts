@@ -15,4 +15,8 @@ export class ChapterService {
   listChaptersOfBook(bookId: number): Observable<Chapter[]> {
       return this.httpClient.get<Chapter[]>(this.headerService.getPath() + "/chapter/chapters-of-book/" + bookId, {headers: this.headerService.getBasicAuthentication()});
   }
+
+  findChapter(chapterId: number): Observable<Chapter> {
+    return this.httpClient.get<Chapter>(this.headerService.getPath() + "/chapter/show/" + chapterId, {headers: this.headerService.getBasicAuthentication()});
+  }
 }

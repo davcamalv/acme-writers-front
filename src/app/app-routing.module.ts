@@ -1,3 +1,4 @@
+import { ChapterComponent } from './chapter/chapter.component';
 import { BookComponent } from './book/book.component';
 import { ListBooksComponent } from './list-books/list-books.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -10,6 +11,8 @@ const routes: Routes = [
   {path: 'browse', component: BrowseComponent},
   {path: 'listMyBooks', component: ListBooksComponent},
   {path: 'showBook', component: BookComponent},
+  {path: 'showChapter', component: ChapterComponent},
+
 ];
 
 @NgModule({
