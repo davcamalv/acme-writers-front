@@ -3,7 +3,7 @@
     <owl-carousel #OwlElement [options]="mySlideOptions" [carouselClasses]="['owl-theme', 'sliding']" >
       <div class="item" *ngFor="let book of newBooks">
         <div>
-          <button class="img-buttons" mat-raised-button>
+          <button class="img-buttons" mat-raised-button (click)="navigateTo('showBook',undefined,book.id)">
             <h4 class="mat-h4">{{book.title}}</h4>
             <img src={{book.cover}} src-fallback="{{ fallbackImg }}"/>
           </button>

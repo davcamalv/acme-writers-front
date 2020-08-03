@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Book } from './../models/book';
 import { BookService } from './../services/book.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -12,7 +13,7 @@ export class BrowseComponent implements OnInit {
 
   newBooks: Book[];
 
-  constructor(private bookService: BookService) { }
+  constructor(private router: Router, private bookService: BookService) { }
 
   ngOnInit(): void {
     this.bookService
@@ -22,6 +23,19 @@ export class BrowseComponent implements OnInit {
      this.initCarousel();
     });
   }
+
+  navigateTo(route: string, method?: string, id?: number): void{
+    if(method==undefined && id == undefined){
+      this.router.navigate([route]);
+    }else if(method != undefined && id == undefined){
+      this.router.navigate([route], {queryParams:{method: method}});
+    }else if(method == undefined && id != undefined){
+      this.router.navigate([route], {queryParams:{id: id}});
+    }else if(method != undefined && id != undefined){
+      this.router.navigate([route], {queryParams:{method: method, id: id}});
+    }
+  }
+
 
   @ViewChild('OwlElement') OwlElement: OwlCarousel
   initCarousel(){

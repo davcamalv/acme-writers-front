@@ -5,9 +5,19 @@ export interface Book {
   language: string,
   cover?: string,
   draft: boolean,
-  ticker: string,
+  identifier: string,
   genre?: string,
   publisher?: number,
   writer: number
 
+}
+
+export interface BookToSave {
+  book_id: number,
+  title: string,
+  description: string,
+  language: string,
+  cover?: string,
+  genre?: string,
+  publisher_id?: number,
 }

@@ -1,3 +1,4 @@
+import { SaveBookComponent } from './save-book/save-book.component';
 import { AuthService } from './services/auth.service';
 import { LoginComponent } from './auth/login/login.component';
 import { Component, OnDestroy, OnInit, Injectable } from '@angular/core';
@@ -20,7 +21,6 @@ export class AppComponent implements OnInit, OnDestroy {
   roles: string[] = [];
   routes: Object[] = [];
   constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {
-
   }
 
   ngOnInit(): void{
@@ -74,6 +74,18 @@ export class AppComponent implements OnInit, OnDestroy {
       if(token != null && token != ""){
         this.redirectUser();
       }
+    });
+  }
+
+  createBook(){
+    let dialog = this.dialog.open(SaveBookComponent, {
+      width: '350px',
+      data: {
+        id: 0
+      }
+    });
+    dialog.afterClosed().subscribe(()=>{
+      this.navigateTo('listMyBooks');
     });
   }
 

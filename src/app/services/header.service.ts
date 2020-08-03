@@ -31,13 +31,14 @@ export class HeaderService {
     private isTokenExpired(): boolean{
       let res: boolean = false;
       let token = sessionStorage.getItem("ACCESS_TOKEN");
-      if(token != null){
+      if(token != undefined){
         let decodedToken = jwt_decode(token);
         let expirationDate = new Date(decodedToken["exp"] * 1000);
         if(new Date() > expirationDate){
           res = true;
         }
       }
+
       return res;
     }
   }
