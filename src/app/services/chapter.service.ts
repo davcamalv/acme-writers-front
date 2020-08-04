@@ -1,4 +1,4 @@
-import { Chapter } from './../models/chapter';
+import { Chapter, ChapterToSave } from './../models/chapter';
 import { Book } from './../models/book';
 import { Observable } from 'rxjs';
 import { HeaderService } from './header.service';
@@ -14,5 +14,17 @@ export class ChapterService {
 
   listChaptersOfBook(bookId: number): Observable<Chapter[]> {
       return this.httpClient.get<Chapter[]>(this.headerService.getPath() + "/chapter/chapters-of-book/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  findChapter(chapterId: number): Observable<Chapter> {
+    return this.httpClient.get<Chapter>(this.headerService.getPath() + "/chapter/show/" + chapterId, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  createChapter(chapter: ChapterToSave): Observable<Chapter> {
+    return this.httpClient.post<Chapter>(this.headerService.getPath() + "/chapter/" + chapter.book_id, chapter, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  updateChapter(chapter: ChapterToSave): Observable<Chapter> {
+    return this.httpClient.put<Chapter>(this.headerService.getPath() + "/chapter", chapter, {headers: this.headerService.getBasicAuthentication()});
   }
 }

@@ -53,11 +53,10 @@ export class SaveBookComponent implements OnInit {
           description: this.description.value,
           language: this.language.value,
           cover: this.cover.value,
-          publisher_id: this.publisher.value
+          publisher_id: this.publisher.value,
+          genre: this.genre.value
         };
-        if(this.genre.value != ''){
-          this.book.genre = this.genre.value;
-        }
+
         this.bookService.updateBook(this.book).subscribe(() => {
           this.dialogRef.close();
         },
@@ -71,11 +70,10 @@ export class SaveBookComponent implements OnInit {
           description: this.description.value,
           language: this.language.value,
           cover: this.cover.value,
-          publisher_id: this.publisher.value
+          publisher_id: this.publisher.value,
+          genre: this.genre.value
+
         };
-        if(this.genre.value != ''){
-          this.book.genre = this.genre.value;
-        }
         this.bookService.createBook(this.book).subscribe(() => {
           this.dialogRef.close();
         },
