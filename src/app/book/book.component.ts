@@ -18,6 +18,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class BookComponent implements OnInit {
 
   opinions: Opinion[];
+  chapters: Chapter[];
   book: Book;
   bookId: number;
   fallbackImg = 'assets/book_cover.png';
@@ -46,34 +47,42 @@ export class BookComponent implements OnInit {
     .findBook(this.bookId)
     .subscribe((book: Book) => {
       this.book = book;
+      if(!book.draft){
+        this.opinionService
+        .listOpinionsOfBook(this.bookId)
+        .subscribe((opinions: Opinion[]) => {
+          this.opinions = opinions;
+        });
+      }
     });
     this.chapterService
     .listChaptersOfBook(this.bookId)
     .subscribe((chapters: Chapter[]) => {
+      this.chapters = chapters;
       this.matDataSource.data = chapters;
     });
-    this.opinionService
-    .listOpinionsOfBook(this.bookId)
-    .subscribe((opinions: Opinion[]) => {
-      this.opinions = opinions;
-    });
+
   }
 
   publish(bookId: number): void {
     this.bookService.changeDraft(bookId).subscribe(() => {
       this.router.navigate(['listMyBooks']);
     });
-}
+  }
 
-updateBook(bookId: number){
-  let dialog = this.dialog.open(SaveBookComponent, {
-    width: '350px',
-    data: {
-      id: bookId
-    }
-  });
-  dialog.afterClosed().subscribe(()=>{
-    this.navigateTo('listMyBooks');
-  });
-}
+  createChapter(){
+    this.router.navigate(['saveChapter'], {queryParams:{bookId: this.bookId, id: 0}});
+  }
+
+  updateBook(bookId: number){
+    let dialog = this.dialog.open(SaveBookComponent, {
+      width: '350px',
+      data: {
+        id: bookId
+      }
+    });
+    dialog.afterClosed().subscribe(()=>{
+      this.navigateTo('listMyBooks');
+    });
+  }
 }

@@ -21,7 +21,7 @@ export class ChapterComponent implements OnInit {
   chapterId: number;
   matDataSource = new MatTableDataSource([]);
   displayedColumns: string[] = ['number', 'title', 'buttons'];
-  constructor(private router: Router, private route: ActivatedRoute, private chapterService: ChapterService, private dialog: MatDialog) {
+  constructor(private router: Router, private route: ActivatedRoute, private chapterService: ChapterService) {
     this.chapterId = this.route.snapshot.queryParams['id'];
    }
 
@@ -35,19 +35,6 @@ export class ChapterComponent implements OnInit {
     }else if(method != undefined && id != undefined){
       this.router.navigate([route], {queryParams:{method: method, id: id}});
     }
-  }
-
-  updateChapter(bookId: number){
-    let dialog = this.dialog.open(SaveBookComponent, {
-      width: '350px',
-      data: {
-        id: bookId
-      }
-    });
-    dialog.afterClosed().subscribe(()=>{
-      this.navigateTo('listMyBooks');
-      this.ngOnInit();
-    });
   }
 
   ngOnInit(): void {

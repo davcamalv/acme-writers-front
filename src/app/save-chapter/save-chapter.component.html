@@ -1,0 +1,45 @@
+<div class="save-chapter">
+  <h2 class="mat-display-2">{{chapterId > 0? 'Update Chapter' : 'Create Chapter'}}</h2>
+  <div>
+    <div>
+      <table style="width: 100%;" cellspacing="0">
+        <tr>
+          <td style="width: 20%;">
+            <mat-form-field style="width: 100%;">
+              <mat-label>Number</mat-label>
+              <input matInput [formControl]="number"/>
+              <mat-error *ngIf="number.invalid">{{ getErrorMessageNumber() }}</mat-error>
+            </mat-form-field>
+          </td>
+          <td style="width: 80%;">
+            <mat-form-field style="width: 100%;">
+              <mat-label>Title</mat-label>
+              <input matInput [formControl]="title"/>
+              <mat-error *ngIf="title.invalid">{{ getErrorMessageTitle() }}</mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <mat-form-field style="width: 100%;">
+        <mat-label>text</mat-label>
+        <textarea matInput [formControl]="text" matTextareaAutosize matAutosizeMinRows=15></textarea>
+        <mat-error *ngIf="text.invalid">{{ getErrorMessageText() }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <br/>
+    <div id="buttons">
+      <button id="cancel" mat-raised-button color="warn" (click)="cancel()">
+        Cancel
+      </button>
+      <button id="save" mat-raised-button color="primary" (click)="save()" [disabled]="abled()" cdkFocusInitial>
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+
+
+

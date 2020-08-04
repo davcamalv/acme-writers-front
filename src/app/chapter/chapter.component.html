@@ -19,7 +19,7 @@
 
       <ng-container matColumnDef="buttons">
         <td mat-cell *matCellDef="let element" class="buttons">
-          <button mat-raised-button color="primary" *ngIf="chapter.book.draft">Edit</button>
+          <button mat-raised-button color="primary" *ngIf="chapter.book.draft" (click)="navigateTo('saveChapter',undefined,element.id)">Edit</button>
           <button mat-raised-button disabled="element.id != chapter.id" color="accent" (click)="navigateTo('showChapter',undefined,element.id)">Read</button>
         </td>
       </ng-container>

@@ -1,3 +1,4 @@
+import { SaveChapterComponent } from './save-chapter/save-chapter.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { BookComponent } from './book/book.component';
 import { ListBooksComponent } from './list-books/list-books.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'listMyBooks', component: ListBooksComponent},
   {path: 'showBook', component: BookComponent},
   {path: 'showChapter', component: ChapterComponent},
+  {path: 'saveChapter', component: SaveChapterComponent},
 
 ];
 
