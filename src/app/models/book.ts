@@ -8,8 +8,8 @@ export interface Book {
   identifier: string,
   genre?: string,
   publisher?: number,
-  writer: number
-
+  writer: number,
+  readers: number[]
 }
 
 export interface BookToSave {

@@ -6,6 +6,7 @@ import { BookService } from './../services/book.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-list-books',
@@ -24,6 +25,9 @@ export class ListBooksComponent implements OnInit {
   fallbackImg = 'assets/book_cover.png';
   displayedColumns: string[] = ['identifier','title','language', 'mode'];
   expandedElement: Book | null;
+  empty: Boolean = false;
+  tokenDecoded = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
+  roles = this.tokenDecoded["roles"];
 
   constructor(private router: Router, private bookService: BookService, private dialog: MatDialog) {
   }
@@ -33,6 +37,9 @@ export class ListBooksComponent implements OnInit {
     .listMyBooks()
     .subscribe((books: Book[]) => {
       this.matDataSource.data = books;
+      if(books.length === 0){
+        this.empty = true;
+      }
     });
   }
 
@@ -54,6 +61,9 @@ export class ListBooksComponent implements OnInit {
         .listMyBooks()
         .subscribe((books: Book[]) => {
           this.matDataSource.data = books;
+          if(books.length === 0){
+            this.empty = true;
+          }
         });
       });
   }
@@ -66,7 +76,12 @@ export class ListBooksComponent implements OnInit {
       }
     });
     dialog.afterClosed().subscribe(()=>{
-      this.navigateTo('listMyBooks');
+      this.ngOnInit();
+    });
+  }
+
+  removeFromList(bookId: number): void {
+    this.bookService.removeFromMyList(bookId).subscribe(() => {
       this.ngOnInit();
     });
   }

@@ -37,7 +37,7 @@ tr.book-row:not(.book-expanded-row):active {
   height: auto;
 }
 
-img{
+.cover > img{
   max-width: 120px;
   max-height: 120px;
   border: 1px solid black;

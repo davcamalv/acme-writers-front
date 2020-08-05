@@ -74,6 +74,18 @@ export class BookComponent implements OnInit {
     });
   }
 
+  addToList(bookId: number): void {
+    this.bookService.addToMyList(bookId).subscribe(() => {
+      this.router.navigate(['listMyBooks']);
+    });
+  }
+
+  removeFromList(bookId: number): void {
+    this.bookService.removeFromMyList(bookId).subscribe(() => {
+      this.router.navigate(['listMyBooks']);
+    });
+  }
+
   createChapter(){
     this.router.navigate(['saveChapter'], {queryParams:{bookId: this.bookId, id: 0}});
   }

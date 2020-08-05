@@ -34,4 +34,12 @@ export class BookService {
   updateBook(book: BookToSave): Observable<Book> {
     return this.httpClient.put<Book>(this.headerService.getPath() + "/book", book, {headers: this.headerService.getBasicAuthentication()});
   }
+
+  addToMyList(bookId: number): Observable<void> {
+    return this.httpClient.get<void>(this.headerService.getPath() + "/book/add-to-my-list/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  removeFromMyList(bookId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.headerService.getPath() + "/book/remove-from-my-list/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
 }

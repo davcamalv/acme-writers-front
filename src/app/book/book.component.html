@@ -25,6 +25,12 @@
           <button mat-raised-button color="warn" (click)="publish(book.id)">Publish</button>
         </div>
       </li>
+      <li *ngIf="roles.includes('reader')">
+        <div class="manage-my-list">
+          <button mat-raised-button color="primary" (click)="addToList(book.id)" *ngIf="!book.readers.includes(userId)">Add to my list</button>
+          <button mat-raised-button color="warn" (click)="removeFromList(book.id)" *ngIf="book.readers.includes(userId)">Remove from my list</button>
+        </div>
+      </li>
     </ul>
   </div>
   <div class="right">
@@ -57,7 +63,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Opinions">
-        <button mat-raised-button color="accent" style="margin-left: 5%; margin-top: 5%;" (click)="createOpinion()">New Opinion</button>
+        <button mat-raised-button color="accent" *ngIf="roles.includes('reader')"  style="margin-left: 5%; margin-top: 5%;" (click)="createOpinion()">New Opinion</button>
         <div class="opinions" *ngFor="let opinion of opinions">
           <mat-card class="opinion-card">
             <mat-card-header>
