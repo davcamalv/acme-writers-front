@@ -57,11 +57,12 @@
         </div>
       </mat-tab>
       <mat-tab label="Opinions">
+        <button mat-raised-button color="accent" style="margin-left: 5%; margin-top: 5%;" (click)="createOpinion()">New Opinion</button>
         <div class="opinions" *ngFor="let opinion of opinions">
           <mat-card class="opinion-card">
             <mat-card-header>
               <div mat-card-avatar class="opinion-header-image">
-                <img id="cover" src="{{opinion.user.photo}}" src-fallback="{{ fallbackImgUser }}"/>
+                <img id="photo" src="{{opinion.user.photo}}" src-fallback="{{ fallbackImgUser }}"/>
               </div>
               <div class="user-information">
                 <mat-card-title>{{opinion.user.name}}</mat-card-title>
@@ -75,6 +76,9 @@
               <p>
                 {{opinion.review}}
               </p>
+              <div class="edit-opinion-button">
+                <button mat-raised-button color="primary" *ngIf="userId == opinion.user.id" (click)="updateOpinion(opinion.id)">Edit</button>
+              </div>
             </mat-card-content>
           </mat-card>
         </div>

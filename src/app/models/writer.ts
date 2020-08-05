@@ -6,5 +6,6 @@ export interface Writer {
   password: string,
   address?: string,
   phone_number?: string,
+  photo: string,
   credit_card: CreditCard
 }

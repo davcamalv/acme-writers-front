@@ -16,7 +16,7 @@ export class SaveBookComponent implements OnInit {
   title = new FormControl('', { validators: [Validators.required] });
   description = new FormControl('', { validators: [Validators.required] });
   language = new FormControl('', { validators: [Validators.required] });
-  cover = new FormControl('', {validators: [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]});
+  cover = new FormControl('');
   genre = new FormControl('', { validators: [Validators.required] });
   publisher = new FormControl('');
   languages = ['EN', 'ES', 'IT', 'FR', 'DE', 'OTHER'];
@@ -95,8 +95,6 @@ export class SaveBookComponent implements OnInit {
       valid = valid && this.description.valid;
       valid = valid && this.language.valid;
       valid = valid && this.genre.valid;
-      valid = valid && this.cover.valid;
-
 
 
     return valid
@@ -126,8 +124,5 @@ export class SaveBookComponent implements OnInit {
     return this.genre.hasError('required')? "You must enter a genre":"";
   }
 
-  getErrorMessageCover(): string{
-    return this.cover.hasError('pattern')? "You must enter a valid URL":"";
-  }
 
 }

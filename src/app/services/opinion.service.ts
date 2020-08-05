@@ -1,4 +1,4 @@
-import { Opinion } from './../models/opinion';
+import { Opinion, OpinionToSave } from './../models/opinion';
 import { Chapter } from './../models/chapter';
 import { Book } from './../models/book';
 import { Observable } from 'rxjs';
@@ -15,5 +15,17 @@ export class OpinionService {
 
   listOpinionsOfBook(bookId: number): Observable<Opinion[]> {
       return this.httpClient.get<Opinion[]>(this.headerService.getPath() + "/opinion/opinions-of-book/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  findOpinion(opinionId: number): Observable<Opinion> {
+    return this.httpClient.get<Opinion>(this.headerService.getPath() + "/opinion/show/" + opinionId, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  createOpinion(opinion: OpinionToSave): Observable<Opinion> {
+    return this.httpClient.post<Opinion>(this.headerService.getPath() + "/opinion/" + opinion.book_id, opinion, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  updateOpinion(opinion: OpinionToSave): Observable<Opinion> {
+    return this.httpClient.put<Opinion>(this.headerService.getPath() + "/opinion", opinion, {headers: this.headerService.getBasicAuthentication()});
   }
 }

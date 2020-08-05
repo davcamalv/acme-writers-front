@@ -1,3 +1,4 @@
+import { SaveOpinionComponent } from './../save-opinion/save-opinion.component';
 import { SaveBookComponent } from './../save-book/save-book.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Opinion } from './../models/opinion';
@@ -9,6 +10,7 @@ import { Book } from './../models/book';
 import { BookService } from './../services/book.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-book',
@@ -25,7 +27,9 @@ export class BookComponent implements OnInit {
   fallbackImgUser = 'assets/photo_profile.png';
   matDataSource = new MatTableDataSource([]);
   displayedColumns: string[] = ['number', 'title', 'buttons'];
-
+  tokenDecoded = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
+  roles = this.tokenDecoded["roles"];
+  userId = this.tokenDecoded["sub"];
   constructor(private dialog: MatDialog, private router: Router, private route: ActivatedRoute, private bookService: BookService, private chapterService: ChapterService, private opinionService: OpinionService) {
     this.bookId = this.route.snapshot.queryParams['id'];
    }
@@ -72,6 +76,34 @@ export class BookComponent implements OnInit {
 
   createChapter(){
     this.router.navigate(['saveChapter'], {queryParams:{bookId: this.bookId, id: 0}});
+  }
+
+  createOpinion(){
+    let dialog = this.dialog.open(SaveOpinionComponent, {
+      width: '350px',
+      data: {
+        id: 0,
+        userId: this.userId,
+        bookId: this.bookId
+      }
+    });
+    dialog.afterClosed().subscribe(()=>{
+      this.ngOnInit();
+    });
+  }
+
+  updateOpinion(opinionId: number){
+    let dialog = this.dialog.open(SaveOpinionComponent, {
+      width: '350px',
+      data: {
+        id: opinionId,
+        userId: this.userId,
+        bookId: this.bookId
+      }
+    });
+    dialog.afterClosed().subscribe(()=>{
+      this.ngOnInit();
+    });
   }
 
   updateBook(bookId: number){

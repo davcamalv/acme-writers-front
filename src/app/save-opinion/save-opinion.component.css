@@ -1,0 +1,13 @@
+
+#buttons-dialog{
+  width: 100%;
+}
+#save-dialog{
+ float: right;
+}
+.radio-buttons{
+  width: 80%;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}

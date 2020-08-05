@@ -49,6 +49,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { SaveBookComponent } from './save-book/save-book.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { SaveChapterComponent } from './save-chapter/save-chapter.component';
+import { SaveOpinionComponent } from './save-opinion/save-opinion.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { SaveChapterComponent } from './save-chapter/save-chapter.component';
     BookComponent,
     SaveBookComponent,
     ChapterComponent,
-    SaveChapterComponent
+    SaveChapterComponent,
+    SaveOpinionComponent
   ],
   imports: [
     MatTabsModule,
