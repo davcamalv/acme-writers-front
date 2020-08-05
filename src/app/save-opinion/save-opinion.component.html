@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{opinionId > 0? 'Update Opinion' : 'Create Opinion'}}</h2>
+<div>
+    <div>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Review</mat-label>
+        <textarea matInput [formControl]="review" matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=5></textarea>
+        <mat-error *ngIf="review.invalid">{{ getErrorMessageReview() }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div style="width: 100%; margin-top: 5%; margin-bottom: 5%;">
+      <mat-label>What's your opinion of the book?</mat-label>
+      <div class="radio-buttons">
+        <mat-radio-group #rGroup [formControl]="positive">
+          <mat-radio-button radioGroup="rGroup" color="primary" [checked]="true" [value]="true"><mat-icon>thumb_up</mat-icon></mat-radio-button>
+          <mat-radio-button radioGroup="rGroup" style="float: right" color="primary" [value]="false"><mat-icon>thumb_down</mat-icon></mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+
+    <br/>
+    <div id="buttons-dialog">
+      <button id="cancel-dialog" mat-raised-button color="warn" (click)="cancel()">
+        Cancel
+      </button>
+      <button id="save-dialog" mat-raised-button color="primary" (click)="save()" [disabled]="abled()" cdkFocusInitial>
+        Submit
+      </button>
+    </div>
+</div>
+
+
