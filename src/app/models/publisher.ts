@@ -6,6 +6,7 @@ export interface Publisher {
   password: string,
   address?: string,
   phone_number?: string,
+  photo: string,
   VAT: string,
   comercial_name: string,
   credit_card: CreditCard

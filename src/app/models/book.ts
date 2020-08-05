@@ -21,3 +21,9 @@ export interface BookToSave {
   genre?: string,
   publisher_id?: number,
 }
+
+export interface BookSimple {
+  id: number,
+  title: string,
+  draft: boolean,
+}

@@ -16,7 +16,7 @@ export class SaveBookComponent implements OnInit {
   title = new FormControl('', { validators: [Validators.required] });
   description = new FormControl('', { validators: [Validators.required] });
   language = new FormControl('', { validators: [Validators.required] });
-  cover = new FormControl('', {validators: [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]});
+  cover = new FormControl('');
   genre = new FormControl('', { validators: [Validators.required] });
   publisher = new FormControl('');
   languages = ['EN', 'ES', 'IT', 'FR', 'DE', 'OTHER'];
@@ -53,11 +53,10 @@ export class SaveBookComponent implements OnInit {
           description: this.description.value,
           language: this.language.value,
           cover: this.cover.value,
-          publisher_id: this.publisher.value
+          publisher_id: this.publisher.value,
+          genre: this.genre.value
         };
-        if(this.genre.value != ''){
-          this.book.genre = this.genre.value;
-        }
+
         this.bookService.updateBook(this.book).subscribe(() => {
           this.dialogRef.close();
         },
@@ -71,11 +70,10 @@ export class SaveBookComponent implements OnInit {
           description: this.description.value,
           language: this.language.value,
           cover: this.cover.value,
-          publisher_id: this.publisher.value
+          publisher_id: this.publisher.value,
+          genre: this.genre.value
+
         };
-        if(this.genre.value != ''){
-          this.book.genre = this.genre.value;
-        }
         this.bookService.createBook(this.book).subscribe(() => {
           this.dialogRef.close();
         },
@@ -97,8 +95,6 @@ export class SaveBookComponent implements OnInit {
       valid = valid && this.description.valid;
       valid = valid && this.language.valid;
       valid = valid && this.genre.valid;
-      valid = valid && this.cover.valid;
-
 
 
     return valid
@@ -128,8 +124,5 @@ export class SaveBookComponent implements OnInit {
     return this.genre.hasError('required')? "You must enter a genre":"";
   }
 
-  getErrorMessageCover(): string{
-    return this.cover.hasError('pattern')? "You must enter a valid URL":"";
-  }
 
 }

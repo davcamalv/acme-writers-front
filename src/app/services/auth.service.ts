@@ -28,8 +28,7 @@ export class AuthService {
       this.saveToken(res.token)
     },
     (error) => {
-      console.error(error.error);
-      this.logout();
+      sessionStorage.removeItem("ACCESS_TOKEN");
     });
   }
 

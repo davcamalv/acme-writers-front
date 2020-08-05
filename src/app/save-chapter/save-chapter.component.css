@@ -1,0 +1,14 @@
+.save-chapter{
+  width: 60%;
+  margin: auto;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+
+#buttons{
+  width: 100%;
+}
+
+#save{
+  float: right;
+}

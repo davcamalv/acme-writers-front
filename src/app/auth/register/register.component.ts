@@ -60,6 +60,7 @@ export class RegisterComponent implements OnInit {
   name = new FormControl('', { validators: [Validators.required] });
   phone = new FormControl('');
   address = new FormControl('');
+  photo = new FormControl('');
 
   VAT = new FormControl('', { validators: [Validators.required] });
   comercialName = new FormControl('', { validators: [Validators.required] });
@@ -125,7 +126,7 @@ export class RegisterComponent implements OnInit {
   register():void{
     this.disabled = true;
     if(this.rol == "reader"){
-      let reader : Reader = {id: 0, email: this.email.value, password: this.pass.value, name: this.name.value, phone_number: this.phone.value, address: this.address.value}
+      let reader : Reader = {id: 0, email: this.email.value, password: this.pass.value, name: this.name.value, phone_number: this.phone.value, photo: this.photo.value, address: this.address.value}
       this.readerService.register(reader).subscribe(res => {
         this.dialogRef.close();
       }, (error) => {
@@ -135,7 +136,7 @@ export class RegisterComponent implements OnInit {
     if(this.rol == "writer"){
       let creditCard : CreditCard = {holder: this.holder.value, make: this.make.value, number: this.number.value,
         expiration_month: this.expirationDate.value.month(), expiration_year: this.expirationDate.value.year(), cvv: this.cvv.value}
-      let writer : Writer = {id: 0, email: this.email.value, password: this.pass.value, name: this.name.value, phone_number: this.phone.value, address: this.address.value, credit_card: creditCard}
+      let writer : Writer = {id: 0, email: this.email.value, password: this.pass.value, name: this.name.value, phone_number: this.phone.value, photo: this.photo.value, address: this.address.value, credit_card: creditCard}
       this.writerService.register(writer).subscribe(res => {
         this.dialogRef.close();
       }, (error) => {
@@ -145,7 +146,7 @@ export class RegisterComponent implements OnInit {
     if(this.rol == "publisher"){
       let creditCard : CreditCard = {holder: this.holder.value, make: this.make.value, number: this.number.value,
         expiration_month: this.expirationDate.value.month(), expiration_year: this.expirationDate.value.year(), cvv: this.cvv.value}
-      let publisher : Publisher = {id: 0, email: this.email.value, password: this.pass.value, name: this.name.value, phone_number: this.phone.value, address: this.address.value, VAT:this.VAT.value, comercial_name:this.comercialName.value, credit_card: creditCard}
+      let publisher : Publisher = {id: 0, email: this.email.value, password: this.pass.value, name: this.name.value, phone_number: this.phone.value, photo: this.photo.value, address: this.address.value, VAT:this.VAT.value, comercial_name:this.comercialName.value, credit_card: creditCard}
       this.publisherService.register(publisher).subscribe(res => {
         this.dialogRef.close();
       }, (error) => {
@@ -165,7 +166,6 @@ export class RegisterComponent implements OnInit {
       valid = valid && this.pass.valid;
       valid = valid && this.confirmPass.valid;
       valid = valid && this.name.valid;
-
       if(this.rol == 'publisher'){
         valid = valid && this.VAT.valid;
         valid = valid && this.comercialName.valid;
@@ -177,8 +177,6 @@ export class RegisterComponent implements OnInit {
         valid = valid && this.cvv.valid;
         valid = valid && this.expirationDate.valid;
       }
-
-
 
     return valid
   }
