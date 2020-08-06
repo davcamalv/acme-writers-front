@@ -31,8 +31,15 @@
           <button mat-raised-button color="warn" (click)="removeFromList(book.id)" *ngIf="book.readers.includes(userId)">Remove from my list</button>
         </div>
       </li>
+      <li *ngIf="book.publisher === userId && book.status === 'PENDING'">
+        <div class="edit-book">
+          <button mat-raised-button color="primary" (click)="accept(book.id)">Accept</button>
+          <button mat-raised-button color="warn" (click)="reject(book.id)">Reject</button>
+        </div>
+      </li>
     </ul>
   </div>
+
   <div class="right">
     <h1 class="mat-display-2">{{book.title}}</h1>
     <p class="mat-body" style="text-align: justify;">{{book.description}}</p>

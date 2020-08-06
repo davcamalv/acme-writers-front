@@ -6,7 +6,7 @@ import { OpinionService } from './../services/opinion.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Chapter } from './../models/chapter';
 import { ChapterService } from './../services/chapter.service';
-import { Book } from './../models/book';
+import { Book, BookStatus } from './../models/book';
 import { BookService } from './../services/book.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -30,6 +30,8 @@ export class BookComponent implements OnInit {
   tokenDecoded = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
   roles = this.tokenDecoded["roles"];
   userId = this.tokenDecoded["sub"];
+  bookStatus: BookStatus;
+
   constructor(private dialog: MatDialog, private router: Router, private route: ActivatedRoute, private bookService: BookService, private chapterService: ChapterService, private opinionService: OpinionService) {
     this.bookId = this.route.snapshot.queryParams['id'];
    }
@@ -70,6 +72,26 @@ export class BookComponent implements OnInit {
 
   publish(bookId: number): void {
     this.bookService.changeDraft(bookId).subscribe(() => {
+      this.router.navigate(['listMyBooks']);
+    });
+  }
+
+  accept(bookId: number): void {
+    this.bookStatus = {
+      book_id: bookId,
+      status: 'ACCEPTED'
+    };
+    this.bookService.changeStatus(this.bookStatus).subscribe(() => {
+      this.router.navigate(['listMyBooks']);
+    });
+  }
+
+  reject(bookId: number): void {
+    this.bookStatus = {
+      book_id: bookId,
+      status: 'REJECTED'
+    };
+    this.bookService.changeStatus(this.bookStatus).subscribe(() => {
       this.router.navigate(['listMyBooks']);
     });
   }

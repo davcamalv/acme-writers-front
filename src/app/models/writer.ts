@@ -9,3 +9,9 @@ export interface Writer {
   photo: string,
   credit_card: CreditCard
 }
+
+export interface BasicWriter {
+  id: number,
+  name: string,
+  photo?: string
+}
