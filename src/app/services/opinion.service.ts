@@ -28,4 +28,8 @@ export class OpinionService {
   updateOpinion(opinion: OpinionToSave): Observable<Opinion> {
     return this.httpClient.put<Opinion>(this.headerService.getPath() + "/opinion", opinion, {headers: this.headerService.getBasicAuthentication()});
   }
+
+  delete(opinionId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.headerService.getPath() + "/opinion/" + opinionId, {headers: this.headerService.getBasicAuthentication()});
+  }
 }

@@ -1,3 +1,4 @@
+import { ListRequestsComponent } from './list-requests/list-requests.component';
 import { SaveChapterComponent } from './save-chapter/save-chapter.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { BookComponent } from './book/book.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'showBook', component: BookComponent},
   {path: 'showChapter', component: ChapterComponent},
   {path: 'saveChapter', component: SaveChapterComponent},
+  {path: 'listMyRequests', component: ListRequestsComponent},
 
 ];
 

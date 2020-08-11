@@ -1,3 +1,5 @@
+import { PublisherService } from './../services/publisher.service';
+import { BasicPublisher } from './../models/publisher';
 import { Book, BookToSave } from './../models/book';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,9 +25,9 @@ export class SaveBookComponent implements OnInit {
   genres = ['FANTASY', 'TERROR', 'ADVENTURE', 'BIOGRAPHICAL', 'SCIENCE FICTION', 'CRIME', 'ROMANCE', 'MYSTERY', 'OTHER']
   bookId: number;
   book: BookToSave;
-
+  publishers: BasicPublisher[];
   constructor(public dialogRef: MatDialogRef<SaveBookComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private bookService: BookService, private router:Router) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private bookService: BookService, private publisherService: PublisherService) { }
 
   ngOnInit(): void {
     this.bookId = this.data.id;
@@ -36,10 +38,15 @@ export class SaveBookComponent implements OnInit {
         this.language.setValue(book.language);
         this.cover.setValue(book.cover);
         this.genre.setValue(book.genre);
-        this.publisher.setValue(book.publisher);
-
+        this.publisher.setValue(book.publisher.id);
       })
     }
+
+    this.publisherService
+    .listAllPublishers()
+    .subscribe((publishers: BasicPublisher[]) => {
+      this.publishers = publishers;
+    });
   }
 
 

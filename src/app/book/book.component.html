@@ -18,15 +18,38 @@
         <span>{{book.language}}</span>
       </li>
       <br>
+      <li>
+        <strong>Publisher: </strong>
+        <span>{{book.status === 'REJECTED'? 'REJECTED':book.publisher.name===''? ' INDEPENDENT ':book.publisher.name}}</span>
+      </li>
+      <br>
       <br>
       <li *ngIf="book.draft">
-        <div class="edit-book">
+        <div class="edit-book" [class.edit-rejected-book]="book.status==='REJECTED'">
           <button mat-raised-button color="primary" (click)="updateBook(book.id)">Edit</button>
-          <button mat-raised-button color="warn" (click)="publish(book.id)">Publish</button>
+          <button mat-raised-button color="primary" *ngIf="book.status !== 'REJECTED'" (click)="publish(book.id)">Publish</button>
+        </div>
+      </li>
+      <li *ngIf="book.draft">
+        <div class="delete-book">
+          <button mat-raised-button color="warn" (click)="updateBook(book.id)">Delete</button>
+        </div>
+      </li>
+      <li *ngIf="roles.includes('reader')">
+        <div class="manage-my-list">
+          <button mat-raised-button color="primary" (click)="addToList(book.id)" *ngIf="!book.readers.includes(userId)">Add to my list</button>
+          <button mat-raised-button color="warn" (click)="removeFromList(book.id)" *ngIf="book.readers.includes(userId)">Remove from my list</button>
+        </div>
+      </li>
+      <li *ngIf="book.publisher === userId && book.status === 'PENDING'">
+        <div class="edit-book">
+          <button mat-raised-button color="primary" (click)="accept(book.id)">Accept</button>
+          <button mat-raised-button color="warn" (click)="reject(book.id)">Reject</button>
         </div>
       </li>
     </ul>
   </div>
+
   <div class="right">
     <h1 class="mat-display-2">{{book.title}}</h1>
     <p class="mat-body" style="text-align: justify;">{{book.description}}</p>
@@ -47,6 +70,7 @@
 
             <ng-container matColumnDef="buttons">
               <td mat-cell *matCellDef="let element" class="buttons">
+                <button mat-raised-button color="warn" *ngIf="book.draft" (click)="deleteChapter(element.id)">Delete</button>
                 <button mat-raised-button color="primary" *ngIf="book.draft" (click)="navigateTo('saveChapter',undefined,element.id)">Edit</button>
                 <button mat-raised-button color="accent"(click)="navigateTo('showChapter',undefined,element.id)">Read</button>
               </td>
@@ -57,7 +81,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Opinions">
-        <button mat-raised-button color="accent" style="margin-left: 5%; margin-top: 5%;" (click)="createOpinion()">New Opinion</button>
+        <button mat-raised-button color="accent" *ngIf="roles.includes('reader')"  style="margin-left: 5%; margin-top: 5%;" (click)="createOpinion()">New Opinion</button>
         <div class="opinions" *ngFor="let opinion of opinions">
           <mat-card class="opinion-card">
             <mat-card-header>
@@ -77,6 +101,7 @@
                 {{opinion.review}}
               </p>
               <div class="edit-opinion-button">
+                <button mat-raised-button color="warn" *ngIf="userId == opinion.user.id" (click)="deleteOpinion(opinion.id)">delete</button>
                 <button mat-raised-button color="primary" *ngIf="userId == opinion.user.id" (click)="updateOpinion(opinion.id)">Edit</button>
               </div>
             </mat-card-content>

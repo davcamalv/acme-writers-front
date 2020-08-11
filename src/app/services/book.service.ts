@@ -1,4 +1,4 @@
-import { Book, BookToSave } from './../models/book';
+import { Book, BookToSave, BookStatus } from './../models/book';
 import { Observable } from 'rxjs';
 import { HeaderService } from './header.service';
 import { HttpClient } from '@angular/common/http';
@@ -33,5 +33,25 @@ export class BookService {
 
   updateBook(book: BookToSave): Observable<Book> {
     return this.httpClient.put<Book>(this.headerService.getPath() + "/book", book, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  addToMyList(bookId: number): Observable<void> {
+    return this.httpClient.get<void>(this.headerService.getPath() + "/book/add-to-my-list/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  removeFromMyList(bookId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.headerService.getPath() + "/book/remove-from-my-list/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  changeStatus(book: BookStatus): Observable<Book> {
+    return this.httpClient.post<Book>(this.headerService.getPath() + "/book/change-status", book, {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  listMyRequests(): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(this.headerService.getPath() + "/book/list-my-requests", {headers: this.headerService.getBasicAuthentication()});
+  }
+
+  delete(bookId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.headerService.getPath() + "/book/delete/" + bookId, {headers: this.headerService.getBasicAuthentication()});
   }
 }

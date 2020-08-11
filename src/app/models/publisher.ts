@@ -11,3 +11,10 @@ export interface Publisher {
   comercial_name: string,
   credit_card: CreditCard
 }
+
+
+export interface BasicPublisher {
+  id: number,
+  name: string,
+  photo?: string
+}

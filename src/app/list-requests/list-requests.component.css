@@ -1,4 +1,4 @@
-.my-books{
+.requests{
   width: 90%;
   margin: auto;
   margin-top: 5%;
@@ -70,18 +70,5 @@ tr.book-row:not(.book-expanded-row):active {
 .action-buttons > button{
   margin-left: 1%;
   width: 100px;
-}
-
-.make-red{
-  background-color: lightpink;
-}
-
-.details-make-red{
-  background-color: lightpink;
-}
-
-
-tr.make-red:not(.book-expanded-row):hover {
-  background: lightcoral;
 }
 

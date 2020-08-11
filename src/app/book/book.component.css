@@ -5,7 +5,7 @@
 }
 
 #cover{
-  max-width: 85%;
+  width: 85%;
 }
 
 .left{
@@ -49,7 +49,7 @@
 
 .edit-book > button{
   margin-right: 10px;
-  width: 115px;
+  width: 110px;
 }
 
 .opinion-header-image{
@@ -80,8 +80,35 @@
   text-align: right;
 }
 
+.edit-opinion-button > button{
+  margin-left: 1%;
+  width: 100px;
+}
 #photo{
   width: 100%;
   height: 100%;
   border-radius: 50%;
+}
+
+.manage-my-list{
+  width: 71%;
+}
+.manage-my-list > button{
+    width: 100%;
+}
+
+
+.edit-rejected-book{
+  width: 71%;
+}
+.edit-rejected-book > button{
+    width: 100%;
+}
+
+.delete-book{
+  width: 71%;
+  margin-top: 10px;
+}
+.delete-book > button{
+    width: 100%;
 }

@@ -26,4 +26,8 @@ export class ChapterService {
   updateChapter(chapter: ChapterToSave): Observable<Chapter> {
     return this.httpClient.put<Chapter>(this.headerService.getPath() + "/chapter", chapter, {headers: this.headerService.getBasicAuthentication()});
   }
+
+  delete(chapterId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.headerService.getPath() + "/chapter/" + chapterId, {headers: this.headerService.getBasicAuthentication()});
+  }
 }

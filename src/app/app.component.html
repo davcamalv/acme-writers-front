@@ -6,11 +6,10 @@
         <button mat-icon-button (click)="navigateTo('browse')" style="margin-right: 5%;"><mat-icon>home</mat-icon></button>
         <button mat-button [matMenuTriggerFor]="menuBooks">Books</button>
         <mat-menu #menuBooks="matMenu">
-          <button id="menu-button" mat-menu-item (click)="createBook()">Create Book</button>
+          <button id="menu-button" mat-menu-item *ngIf="roles.includes('writer')" (click)="createBook()">Create Book</button>
           <button id="menu-button" mat-menu-item (click)="navigateTo('listMyBooks')">List my Books</button>
         </mat-menu>
-        <button mat-button>Publishers</button>
-        <button mat-button>Reviews</button>
+        <button mat-button *ngIf="roles.includes('publisher')" (click)="navigateTo('listMyRequests')">Requests</button>
       </div>
 
       <div id="menu-horizontal-buttons-right">
