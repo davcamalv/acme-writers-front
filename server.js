@@ -11,7 +11,7 @@ const server = require('http').Server(app);
 
 const access = "/index.html";
 
-const dist_dir = "/../dist/acme-writers-front";
+const dist_dir = "/dist/acme-writers-front";
 
 app.use(express.static(__dirname + dist_dir));
 
