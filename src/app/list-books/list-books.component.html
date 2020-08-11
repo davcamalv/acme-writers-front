@@ -1,0 +1,88 @@
+<div class="my-books">
+
+  <h1 class="mat-h1">My Books</h1>
+  <div class="table" *ngIf="empty === false">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Harry Potter" #input>
+    </mat-form-field>
+    <table mat-table [dataSource]="matDataSource" multiTemplateDataRows
+    class="mat-elevation-z8">
+
+      <ng-container matColumnDef="identifier">
+        <th mat-header-cell *matHeaderCellDef> Identifier </th>
+        <td mat-cell *matCellDef="let row"> {{row.identifier}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="publisher">
+        <th mat-header-cell *matHeaderCellDef> Publisher </th>
+        <td mat-cell *matCellDef="let row"> {{row.status === 'REJECTED'? 'REJECTED':row.publisher.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="language">
+        <th mat-header-cell *matHeaderCellDef> Language </th>
+        <td mat-cell *matCellDef="let row"> {{row.language}} </td>
+      </ng-container>
+
+      <div *ngIf="roles.includes('writer'); else writer">
+        <ng-container matColumnDef="mode">
+          <th mat-header-cell *matHeaderCellDef> Mode </th>
+          <td mat-cell *matCellDef="let row"> {{row.draft? 'draft' : 'final'}}</td>
+        </ng-container>
+      </div>
+
+      <ng-template #writer>
+        <ng-container matColumnDef="writer">
+          <th mat-header-cell *matHeaderCellDef> Writer </th>
+          <td mat-cell *matCellDef="let row"> {{row.writer.name}}</td>
+        </ng-container>
+      </ng-template>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let row" [attr.colspan]="roles.includes('writer')? displayedColumnsWriter.length: displayedColumns.length">
+          <div class="book-detail"
+              [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="book-information">
+              <div class="cover">
+                <img src={{row.cover}} src-fallback="{{ fallbackImg }}"/>
+              </div>
+              <div class="description">
+                <p class="body-1">{{row.description}}</p>
+              </div>
+            </div>
+            <div class="action-buttons">
+              <button mat-raised-button color="warn" *ngIf="row.draft" (click)="deleteBook(row.id)">Delete</button>
+              <button mat-raised-button color="primary" *ngIf="row.draft" (click)="updateBook(row.id)">Edit</button>
+              <button mat-raised-button color="primary" *ngIf="row.draft && row.status !== 'REJECTED'" (click)="publish(row.id)">Publish</button>
+              <button mat-raised-button color="warn" (click)="removeFromList(row.id)" *ngIf="roles.includes('reader')">Remove</button>
+              <button mat-raised-button color="accent"(click)="navigateTo('showBook',undefined,row.id)">See more</button>
+
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="roles.includes('writer')? displayedColumnsWriter: displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: roles.includes('writer')? displayedColumnsWriter: displayedColumns;" class="book-row" [class.book-expanded-row]="expandedElement === row" [class.make-red]="row.status==='REJECTED'"
+        (click)="expandedElement = expandedElement === row ? null : row"></tr>
+      <tr mat-row *matRowDef="let element; columns: ['expandedDetail']" class="book-detail-row" [class.details-make-red]="element.status==='REJECTED'"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+
+    </table>
+
+  </div>
+
+  <div *ngIf="empty === true" style="text-align: center;">
+    <img src="assets/book_cover.png" style="max-width: 300px; margin-bottom: 3%;">
+    <h2>You still don't have any books on your list!</h2>
+  </div>
+</div>
+

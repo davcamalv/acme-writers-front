@@ -1,0 +1,20 @@
+#cancel-dialog {
+  float: left;
+  margin-left: 1em;
+}
+
+#save-dialog {
+  float: right;
+  margin-right: 1em;
+}
+
+#buttons-dialog {
+  justify-content: center;
+}
+
+mat-icon:hover {
+cursor: pointer;
+}
+
+
+
