@@ -23,7 +23,8 @@ import * as jwt_decode from 'jwt-decode';
 export class ListBooksComponent implements OnInit {
   matDataSource = new MatTableDataSource([]);
   fallbackImg = 'assets/book_cover.png';
-  displayedColumns: string[] = ['identifier','title','language', 'mode'];
+  displayedColumns: string[] = ['identifier','title', 'publisher', 'language', 'writer'];
+  displayedColumnsWriter: string[] = ['identifier','title', 'publisher', 'language', 'mode'];
   expandedElement: Book | null;
   empty: Boolean = false;
   tokenDecoded = jwt_decode(sessionStorage.getItem("ACCESS_TOKEN"));
@@ -67,6 +68,19 @@ export class ListBooksComponent implements OnInit {
         });
       });
   }
+
+  deleteBook(bookId: number): void {
+    this.bookService.delete(bookId).subscribe(() => {
+      this.bookService
+      .listMyBooks()
+      .subscribe((books: Book[]) => {
+        this.matDataSource.data = books;
+        if(books.length === 0){
+          this.empty = true;
+        }
+      });
+    });
+}
 
   updateBook(bookId: number){
     let dialog = this.dialog.open(SaveBookComponent, {

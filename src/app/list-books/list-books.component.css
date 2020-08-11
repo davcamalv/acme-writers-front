@@ -72,3 +72,16 @@ tr.book-row:not(.book-expanded-row):active {
   width: 100px;
 }
 
+.make-red{
+  background-color: lightpink;
+}
+
+.details-make-red{
+  background-color: lightpink;
+}
+
+
+tr.make-red:not(.book-expanded-row):hover {
+  background: lightcoral;
+}
+

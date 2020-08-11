@@ -1,3 +1,4 @@
+import { BasicPublisher } from './publisher';
 import { BasicWriter } from './writer';
 export interface Book {
   id: number,
@@ -8,7 +9,7 @@ export interface Book {
   draft: boolean,
   identifier: string,
   genre?: string,
-  publisher?: number,
+  publisher?: BasicPublisher,
   writer: BasicWriter,
   readers: number[],
   status: string

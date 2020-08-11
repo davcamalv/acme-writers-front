@@ -1,4 +1,4 @@
-import { Publisher } from './../models/publisher';
+import { Publisher, BasicPublisher } from './../models/publisher';
 import { tap } from 'rxjs/operators';
 import { JwtResponse } from './../models/jwt-response';
 import { Observable } from 'rxjs';
@@ -21,5 +21,9 @@ export class PublisherService {
         }
       }
     ));
+  }
+
+  listAllPublishers(): Observable<BasicPublisher[]> {
+    return this.httpClient.get<BasicPublisher[]>(this.headerService.getPath() + "/publisher/list-all-publishers", {headers: this.headerService.getBasicAuthentication()});
   }
 }

@@ -70,6 +70,24 @@ export class BookComponent implements OnInit {
 
   }
 
+  deleteBook(bookId: number): void {
+    this.bookService.delete(bookId).subscribe(() => {
+      this.router.navigate(['listMyBooks']);
+    });
+  }
+
+  deleteChapter(chapterId: number): void {
+    this.chapterService.delete(chapterId).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
+  deleteOpinion(opinionId: number): void {
+    this.opinionService.delete(opinionId).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
   publish(bookId: number): void {
     this.bookService.changeDraft(bookId).subscribe(() => {
       this.router.navigate(['listMyBooks']);
@@ -148,7 +166,7 @@ export class BookComponent implements OnInit {
       }
     });
     dialog.afterClosed().subscribe(()=>{
-      this.navigateTo('listMyBooks');
+      this.ngOnInit();
     });
   }
 }

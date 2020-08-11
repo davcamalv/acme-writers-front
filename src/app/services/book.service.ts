@@ -50,4 +50,8 @@ export class BookService {
   listMyRequests(): Observable<Book[]> {
     return this.httpClient.get<Book[]>(this.headerService.getPath() + "/book/list-my-requests", {headers: this.headerService.getBasicAuthentication()});
   }
+
+  delete(bookId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.headerService.getPath() + "/book/delete/" + bookId, {headers: this.headerService.getBasicAuthentication()});
+  }
 }
